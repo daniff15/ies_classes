@@ -1,4 +1,4 @@
-package lab1.MyWeatherRadar;
+package com.weatherRadar.app;
 
 import static org.junit.Assert.assertTrue;
 
