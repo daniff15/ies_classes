@@ -107,4 +107,4 @@ public class CityForecast {
     public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
-}
+} 
