@@ -3,5 +3,6 @@
         "lab1/lab1_2/MyWeatherRadar",
         "lab1/lab1_2",
         "lab1"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

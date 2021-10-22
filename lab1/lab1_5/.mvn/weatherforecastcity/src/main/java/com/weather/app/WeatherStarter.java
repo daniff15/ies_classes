@@ -1,4 +1,4 @@
-package com.weatherRadar.app;
+package com.weather.app;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class WeatherStarter {
 
-    private static final Map<Integer, String> places = new HashMap<>();
+    private static final Map<String, Integer> places = new HashMap<>();
     /*
     loggers provide a better alternative to System.out.println
     https://rules.sonarsource.com/java/tag/bad-practice/RSPEC-106
@@ -46,15 +46,15 @@ public class WeatherStarter {
         Iterator<CityInfo> iterator = cidades.getData().listIterator();
         while (iterator.hasNext()) {
             CityInfo cityObj = iterator.next();
-            places.put(cityObj.getGlobalIdLocal(), cityObj.getLocal());
+            places.put(cityObj.getLocal(), cityObj.getGlobalIdLocal());
         }
 
-        String codigo_cidade = args[0];
-        String cidade_pedida = null;
+        String cidade_pedida = args[0];
+        int codigo_cidade = null;
         Boolean flag = true;
         while(flag){
-            if(places.get(Integer.parseInt(codigo_cidade)) != null){
-                cidade_pedida = places.get(Integer.parseInt(codigo_cidade));
+            if(places.get(cidade_pedida) != null){
+                codigo_cidade = places.get(cidade_pedida);
                 flag = false;
             }
             else {
@@ -64,7 +64,7 @@ public class WeatherStarter {
             }
         }
 
-        Call<IpmaCityForecast> callSync = service.getForecastForACity(Integer.parseInt(codigo_cidade));
+        Call<IpmaCityForecast> callSync = service.getForecastForACity(cidade_pedida);
 
         try {
             Response<IpmaCityForecast> apiResponse = callSync.execute();
