@@ -52,12 +52,12 @@ mvn plugin-group-id:plugin-artifact-id[:plugin-version]:goal
 
 ## C
 
-'''bash
+```bash
 git remote add origin <REMOTE_URL>  # get the folder  
 git add .                           # after some development mark all existing changes to be commited
 git commit -m "changes made"        # create the commit snapshot locally 
 git push -u origin main             # uploads the local commit to the shared repo 
-'''
+```
 
 ## D
 Git commit messages should be small messages with a maximum of 72 chars
