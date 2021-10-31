@@ -19,7 +19,7 @@ public class ParametersService extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, NullPointerException {
+            throws ServletException, IOException {
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
@@ -38,16 +38,42 @@ public class ParametersService extends HttpServlet {
         try {
             firstName = request.getParameter("firstname");
             lastName = request.getParameter("lastname");
+
+            if (firstName == null || lastName == null) {
+                throw new NullPointerException("Tracking parameters logging example");
+            }
         } catch (NullPointerException e) {
-            out.println(e.getStackTrace());
+            e.getStackTrace();
         }
-        
-        out.println("<h4>Hello user:" + firstName + " " + lastName + " </h4>");
-       
+
+        /*
+        try {
+            firstName = request.getParameter("firstname");
+            lastName = request.getParameter("lastname");
+
+        } catch (NullPointerException e) {
+            throw new NullPointerException("Tracking parameters logging example");
+        }*/
+
+        out.println("<h4>Hello user:" + firstName.toString() + " " + lastName.toString() + " </h4>");
+
+    }
+
+    static void fun()
+    {
+        try
+        {
+            throw new NullPointerException("demo");
+        }
+        catch(NullPointerException e)
+        {
+            System.out.println("Caught inside fun().");
+            throw e; // rethrowing the exception
+        }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException, NullPointerException {
+            throws IOException, ServletException {
         doGet(request, response);
     }
 }
