@@ -39,7 +39,10 @@ public class ParametersService extends HttpServlet {
             firstName = request.getParameter("firstname");
             lastName = request.getParameter("lastname");
 
+
             if (firstName == null || lastName == null) {
+                firstName = firstName.toString();
+                lastName = lastName.toString();
                 throw new NullPointerException("Tracking parameters logging example");
             }
         } catch (NullPointerException e) {
@@ -57,19 +60,6 @@ public class ParametersService extends HttpServlet {
 
         out.println("<h4>Hello user:" + firstName.toString() + " " + lastName.toString() + " </h4>");
 
-    }
-
-    static void fun()
-    {
-        try
-        {
-            throw new NullPointerException("demo");
-        }
-        catch(NullPointerException e)
-        {
-            System.out.println("Caught inside fun().");
-            throw e; // rethrowing the exception
-        }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
