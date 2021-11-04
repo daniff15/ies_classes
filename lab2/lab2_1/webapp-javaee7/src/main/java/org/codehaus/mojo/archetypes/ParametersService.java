@@ -1,18 +1,19 @@
 package org.codehaus.mojo.archetypes;
 
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-@WebServlet(name = "parametersService", urlPatterns = { "/parametersService" })
+@WebServlet(name = "parameters", urlPatterns = { "/parameters" })
 public class ParametersService extends HttpServlet {
 
     private static final long serialVersionUID = -1915463532411657451L;
@@ -21,49 +22,33 @@ public class ParametersService extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("text/html");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        String username = request.getParameter("username");
 
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<title>Request Parameters Example</title>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<h3>Request Parameters Example</h3>");
-        out.println("Parameters passed in url!<br>");
-
-        String firstName = null;
-        String lastName = null;
-
-        try {
-            firstName = request.getParameter("firstname");
-            lastName = request.getParameter("lastname");
-
-
-            if (firstName == null || lastName == null) {
-                firstName = firstName.toString();
-                lastName = lastName.toString();
-                throw new NullPointerException("Tracking parameters logging example");
+        if (username == null) {
+            throw new NullPointerException("There isn't a usernane!");
+        } else {
+            try {
+                // Write some content
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>CalendarServlet</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h2>Hello " + username + "</h2>");
+                out.println("<h2>The time right now is : " + new Date() + "</h2>");
+                out.println("</body>");
+                out.println("</html>");
+            } finally {
+                out.close();
             }
-        } catch (NullPointerException e) {
-            e.getStackTrace();
         }
-
-        /*
-        try {
-            firstName = request.getParameter("firstname");
-            lastName = request.getParameter("lastname");
-
-        } catch (NullPointerException e) {
-            throw new NullPointerException("Tracking parameters logging example");
-        }*/
-
-        out.println("<h4>Hello user:" + firstName.toString() + " " + lastName.toString() + " </h4>");
-
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
-        doGet(request, response);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Do some other work
     }
 }
