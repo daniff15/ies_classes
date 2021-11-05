@@ -25,7 +25,9 @@ As starters dependencies fazem com que seja possível correr a Spring Boot app s
 
 ## D
 @EnableAutoConfiguration - enable Spring Boot's auto-configuration mechanism so that the project is ready to be built.
+
 @ComponentScan - It allows the Spring Boot to identify all Spring annotations.
+
 @Configuration - It allows to add aditional configurations to our Spring project.
 
 ## E
