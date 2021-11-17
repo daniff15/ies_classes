@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.ResourceNotFoundException;
-import com.example.demo.Employee;
-import com.example.demo.EmployeeRepository;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.Employee;
+import com.example.demo.repository.EmployeeRepository;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -68,5 +68,12 @@ public class EmployeeController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
+    }
+
+    @GetMapping("/employees?email={email}")
+    public ResponseEntity<Employee> getEmployeeByEmail(@PathVariable(value = "email") String employeeEmail)
+            throws ResourceNotFoundException {
+        Employee employee = employeeRepository.findByEmailId(employeeEmail);
+        return ResponseEntity.ok().body(employee);
     }
 }
