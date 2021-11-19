@@ -20,7 +20,6 @@ public class Quote {
     private String quote;
     private String role;
     private String show;
-    private boolean contain_adult_lang;
 
     @ManyToOne
     @JoinColumn(name="movie_id", nullable=false)
@@ -34,7 +33,6 @@ public class Quote {
         this.quote = quote;
         this.role = role;
         this.show = show;
-        this.contain_adult_lang = contain_adult_lang;
 
     }
 
@@ -74,15 +72,5 @@ public class Quote {
     public void setShow(String show) {
         this.show = show;
     }
-
-    @Column(name = "contain_adult_lang", nullable = false)
-    public boolean isContain_adult_lang() {
-        return this.contain_adult_lang;
-    }
-
-    public void setContain_adult_lang(boolean contain_adult_lang) {
-        this.contain_adult_lang = contain_adult_lang;
-    }
-
 
 }
